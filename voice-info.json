@@ -1,0 +1,54 @@
+{
+  "description": "Voice list of all voices packaged inside assets. This list is hand-crafted.",
+  "voices": [{
+    "name": "Álfur",
+    "internal_name": "Alfur_fastspeech2_0.0.1",
+    "description": "Álfur neural network voice: FastSpeech 2 model, Melgan vocoder",
+    "language": "is-IS",
+    "language_name": "Íslenska",
+    "gender": "male",
+    "type": "torchscript",
+    "version": "0.0.1",
+    "files": [
+      {
+        "description": "FastSpeech2 model",
+        "path": "alfur_fastspeech_qnnpack_lite_v0_0_1.pt",
+        "type": "fastspeech2",
+        "phoneme_type": "x-sampa",
+        "md5sum": "cefd8b761d30009949ae50de0b3ce41b"
+      },
+      {
+        "description": "Melgan Vocoder",
+        "path": "alfur_melgan_jit_lite-0_0_1.pt",
+        "type": "melgan",
+        "md5sum": "f9012f085b024a9e8ba9b6c83d5b7f05"
+      }
+    ]
+  },
+  {
+    "name": "Diljá",
+    "internal_name": "Dilja_fastspeech2_0.0.1",
+    "description": "Diljá neural network voice: FastSpeech 2 model, Melgan vocoder",
+    "language": "is-IS",
+    "language_name": "Íslenska",
+    "gender": "female",
+    "type": "torchscript",
+    "version": "0.0.1",
+    "files": [
+      {
+        "description": "FastSpeech2 model",
+        "path": "dilja_fastspeech_qnnpack_lite_v0_0_1.pt",
+        "type": "fastspeech2",
+        "phoneme_type": "x-sampa",
+        "md5sum": "ba45a3d3e8f853e798bcb8b03943cdd4"
+      },
+      {
+        "description": "Melgan Vocoder",
+        "path": "dilja_melgan_jit_lite-0_0_1.pt",
+        "type": "melgan",
+        "md5sum": "a766a3866f28693e5857248c374ce703"
+      }
+    ]
+  }
+  ]
+}
