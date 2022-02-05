@@ -9,19 +9,20 @@
     "gender": "male",
     "type": "torchscript",
     "version": "0.0.1",
+    "rtf": "3.18",
     "files": [
       {
         "description": "FastSpeech2 model",
         "path": "alfur_fastspeech_qnnpack_lite_v0_0_1.pt",
         "type": "fastspeech2",
         "phoneme_type": "x-sampa",
-        "md5sum": "cefd8b761d30009949ae50de0b3ce41b"
+        "md5sum": "574a44c0c8c467161f4bd5153f9c95a6"
       },
       {
         "description": "Melgan Vocoder",
         "path": "alfur_melgan_jit_lite-0_0_1.pt",
         "type": "melgan",
-        "md5sum": "f9012f085b024a9e8ba9b6c83d5b7f05"
+        "md5sum": "60ba6b9baf360aacfb89f23fd6ced82b"
       }
     ]
   },
@@ -34,19 +35,20 @@
     "gender": "female",
     "type": "torchscript",
     "version": "0.0.1",
+    "rtf": "3.05",
     "files": [
       {
         "description": "FastSpeech2 model",
         "path": "dilja_fastspeech_qnnpack_lite_v0_0_1.pt",
         "type": "fastspeech2",
         "phoneme_type": "x-sampa",
-        "md5sum": "ba45a3d3e8f853e798bcb8b03943cdd4"
+        "md5sum": "a39b09c61023a46b48d283dac671de91"
       },
       {
         "description": "Melgan Vocoder",
         "path": "dilja_melgan_jit_lite-0_0_1.pt",
         "type": "melgan",
-        "md5sum": "a766a3866f28693e5857248c374ce703"
+        "md5sum": "8ee766ec4f3607be9fe478683159214f"
       }
     ]
   }
