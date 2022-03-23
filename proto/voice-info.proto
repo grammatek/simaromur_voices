@@ -1,0 +1,175 @@
+syntax = "proto3";
+
+package org.sim.voices;
+
+/*
+  Version info, shall adhere to semantic versioning in Hex number for easier
+  comparison.  E.g. 0x00010001 for version 1.0.1.
+  Rules are as follows:
+    - Major number shall be increased, in case of incompatible changes,
+        e.g. semantically incompatible change, new parameters needed, etc.
+    - Minor number shall be increased, in case of a compatible changes,
+        e.g. renaming of members, adding new members, changing the protobuf
+        type in a compatible way, improving a models speed/quality, etc.
+    - Patch number shall be increased, in case of a backwards-compatible
+      bug-fix
+*/
+message Revision {
+  uint32 version = 1;
+}
+
+/* Describes a voice model's file entry */
+message FileEntry {
+  enum Compression {
+    COMPRESSION_PLAIN = 0;      // no compression
+    COMPRESSION_BROTLI = 1;
+    COMPRESSION_BZIP2 = 2;
+    COMPRESSION_GZIP = 3;
+    COMPRESSION_ZIP = 4;
+  }
+  enum Format {
+    FORMAT_PLAIN = 0;           // plain file, no archive
+    FORMAT_TAR = 1;             // tar archive
+    FORMAT_CPIO = 2;            // cpio archive
+  }
+  string path = 1;                // relative path, mandatory
+  Compression compression = 2;    // file compression, optional
+  Format format = 3;              // file format, optional
+  string md5 = 4;                 // MD5 sum of file, mandatory
+}
+
+/* Speech model language / locale info */
+message Language {
+  /* <ISO 639 language code>_<ISO 3166 country code> */
+  enum Locale {
+    /* default: any language/country) */
+    LOCALE_ANY = 0;
+    is_IS = 1;
+    /* more entries can be appended here ... */
+  }
+  Locale locale = 1;  // locale of the voice, mandatory
+  string name = 2;    // language name of the voice, mandatory
+}
+
+/* Phonemes used for acoustic model, alphabets and symbol mappings */
+message PhonemeDescription {
+  enum PhonemeType {
+    PHONEME_TYPE_INVALID = 0;
+    /* use IPA symbols, these are always distinct single symbols */
+    PHONEME_TYPE_IPA = 1;
+    /* use "extended Sampas", these are mostly made up of multiple symbols */
+    PHONEME_TYPE_XSAMPA = 2;
+  }
+  /* Mapping between Alphabet and model representation */
+  message AlphabetMapping {
+    /*
+      Mapping of all IPA/XSampa symbols to their corresponding model value,
+      as well as meta-symbols like <sp> "short pause", <pau> "pause", etc. used
+      in model training.
+    */
+    map<string, uint32> symbols = 1;
+  }
+  PhonemeType phoneme_type = 1; // phoneme type, mandatory
+  AlphabetMapping mapping = 2;  // symbol mappings, mandatory
+  bool syllabified = 3;         // "." at each syllable boundary, optional
+  bool stress_labels = 4;       // "0" or "1" after each vowel, optional
+  string word_separator = 5;    // word separator; default "-", optional
+}
+
+/* For NN models: used neural network format */
+enum FormatNN {
+  NN_FORMAT_INVALID = 0;
+  NN_FORMAT_TORCH = 1;          // plain pyTorch
+  NN_FORMAT_TORCHSCRIPT = 2;    // Torchscript
+  NN_FORMAT_TORCH_MOBILE = 3;   // Torchscript mobile
+  NN_FORMAT_ONNX = 4;           // ONNX
+  NN_FORMAT_NNAPI = 5;          // Android NNAPI
+}
+
+/* Voice acoustic model description */
+message AcousticModel {
+  /* Type of the acoustic model */
+  enum AcousticModelType {
+    ACOUSTIC_MODEL_INVALID = 0;
+    ACOUSTIC_MODEL_FESTIVAL_UNIT_SELECTION = 1;
+    ACOUSTIC_MODEL_FESTIVAL_FLITE_GRAPHEME = 2;
+    ACOUSTIC_MODEL_FASTSPEECH2 = 3;
+    ACOUSTIC_MODEL_FASTSPEECH2_ESPNET = 4;
+  }
+  
+  AcousticModelType type = 1;     // acoustic model type
+  FormatNN nn_format = 2;         // for NN models: used neural network format
+  PhonemeDescription phonemes = 3;// describe phonemes and model mappings,
+                                  // mandatory
+  string description = 4;         // acoustic model description, mandatory
+  FileEntry file = 5;             // acoustic model file specifications,
+                                  // mandatory
+  Revision revision = 6;          // acoustic model revision, mandatory
+}
+
+/* Voice vocoder model description for neural network voices */
+message VocoderModel {
+  /* Type of the vocoder model */
+  enum VocoderModelType {
+    VOCODER_MODEL_INVALID = 0;
+    /* Model is used for the first version of SIM voices; This model should be
+       paired with ACOUSTIC_MODEL_FASTSPEECH2. It is not very fast on CPU.
+      */
+    VOCODER_MODEL_MELGAN = 1;
+    /* Model is used for the second generation of SIM voices; it is supposed to
+       be fast on GPU and is a universal vocoder model, i.e. it can be used for
+       all acoustic models of type ACOUSTIC_MODEL_FASTSPEECH2_ESPNET.
+      */
+    VOCODER_MODEL_PARALLEL_WAVEGAN = 2;
+  }
+  VocoderModelType type = 1;      // vocoder model type. mandatory
+  FormatNN nn_format = 2;         // for NN models: used neural network format
+  float max_output_value = 3;     // max value in generated output stream after
+                                  // inferencing, mandatory
+  string description = 4;         // vocoder model description, mandatory
+  FileEntry file = 5;             // vocoder model file specifications,
+                                  // mandatory
+  Revision revision = 6;          // vocoder model revision, mandatory
+}
+
+/* Voice description. The given information provide here, should be sufficient
+   for for inferencing of the underlying voice model.
+ */
+message Voice {
+  enum Gender {
+    GENDER_UNKNOWN = 0;
+    GENDER_MALE = 1;
+    GENDER_FEMALE = 2;
+  }
+  string name = 1;            // displayed name, mandatory
+  string internal_name = 2;   // unique name among all voices, mandatory
+  string description = 3;     // general description of the voice, mandatory
+  Language language = 4;      // language of the voice, mandatory
+  Gender gender = 5;          // voice gender, if known
+  float rtf = 6;              // real-time factor, estimated to compare voice 
+                              // speed differences, optional
+  AcousticModel acoustic_model = 7; // acoustic model, mandatory
+  VocoderModel vocoder_model = 8;   // vocoder model, optional in case of non
+                                    // NN-voices
+  repeated string urls = 9;   // URL reference's (git/Clarin) for how this
+                              // voice has been generated and where the
+                              // original model stems from; mandatory
+}
+
+/* Voice collection, i.e. description of all available voices in a collection. */
+message VoiceCollection {
+  string description = 1;     // General description of the voice collection,
+                              //  optional
+  repeated Voice voices = 2;  // all voices available in voice collection
+  Revision abi = 3;           // ABI version of the VoiceCollection proto,
+                              // mandatory
+  /*
+    Optional: if archive variable is not empty, it's meant to describe the top
+    level archive of all voices of the voice collection that needs to be
+    unpacked first to get hold of all voice models. The model file description
+    url's are then relative to the unpackaging directory. In case this variable
+    is empty, all model files need to be available relative to this
+    VoiceCollection description.
+  */
+  FileEntry archive = 4;
+}
