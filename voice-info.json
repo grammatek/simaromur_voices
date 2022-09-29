@@ -10,6 +10,7 @@
     "type": "torchscript",
     "version": "0.0.1",
     "rtf": "3.18",
+    "residence": "assets",
     "files": [
       {
         "description": "FastSpeech2 model",
@@ -36,6 +37,7 @@
     "type": "torchscript",
     "version": "0.0.1",
     "rtf": "3.05",
+    "residence": "assets",
     "files": [
       {
         "description": "FastSpeech2 model",
