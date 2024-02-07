@@ -1,60 +1,34 @@
 {
   "description": "Voice list of all voices packaged inside assets. This list is hand-crafted.",
-  "voices": [{
-    "name": "Álfur",
-    "internal_name": "Alfur_fastspeech2_0.0.1",
-    "description": "Álfur neural network voice: FastSpeech 2 model, Melgan vocoder",
-    "language": "is-IS",
-    "language_name": "Íslenska",
-    "gender": "male",
-    "type": "torchscript",
-    "version": "0.0.1",
-    "rtf": "3.18",
-    "residence": "assets",
-    "release": "0.1",
-    "files": [
-      {
-        "description": "FastSpeech2 model",
-        "path": "alfur_fastspeech_qnnpack_lite_v0_0_1.pt",
-        "type": "fastspeech2",
-        "phoneme_type": "x-sampa",
-        "md5sum": "574a44c0c8c467161f4bd5153f9c95a6"
-      },
-      {
-        "description": "Melgan Vocoder",
-        "path": "alfur_melgan_jit_lite-0_0_1.pt",
-        "type": "melgan",
-        "md5sum": "60ba6b9baf360aacfb89f23fd6ced82b"
-      }
-    ]
-  },
-  {
-    "name": "Diljá",
-    "internal_name": "Dilja_fastspeech2_0.0.1",
-    "description": "Diljá neural network voice: FastSpeech 2 model, Melgan vocoder",
-    "language": "is-IS",
-    "language_name": "Íslenska",
-    "gender": "female",
-    "type": "torchscript",
-    "version": "0.0.1",
-    "rtf": "3.05",
-    "residence": "assets",
-    "release": "0.1",
-    "files": [
-      {
-        "description": "FastSpeech2 model",
-        "path": "dilja_fastspeech_qnnpack_lite_v0_0_1.pt",
-        "type": "fastspeech2",
-        "phoneme_type": "x-sampa",
-        "md5sum": "a39b09c61023a46b48d283dac671de91"
-      },
-      {
-        "description": "Melgan Vocoder",
-        "path": "dilja_melgan_jit_lite-0_0_1.pt",
-        "type": "melgan",
-        "md5sum": "8ee766ec4f3607be9fe478683159214f"
-      }
-    ]
-  }
+  "voices": [
+    {
+      "name": "Steinn",
+      "internal_name": "stein_vits_onnx_xs_ipa_0.0.1",
+      "description": "Steinn AI voice x-small",
+      "language": "isl-ISL",
+      "language_name": "Íslenska",
+      "gender": "male",
+      "type": "onnx",
+      "version": "0.5",
+      "rtf": "13.0",
+      "residence": "assets",
+      "release": "0.1",
+      "files": [
+        {
+          "description": "ONNX model",
+          "path": "is-steinn-xs-ipa.onnx",
+          "type": "vits",
+          "phoneme_type": "ipa",
+          "sample_rate": 16000,
+          "md5sum": "1c32a01f901e9bc3eb944a7713b5571d"
+        },
+        {
+          "description": "ONNX model configuration",
+          "path": "is-steinn-xs-ipa.onnx.json",
+          "type": "json",
+          "md5sum": "31a565683d0927cb8a39d5f80ebd85c1"
+        }
+      ]
+    }
   ]
 }
