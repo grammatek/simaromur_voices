@@ -9,15 +9,15 @@ This repository contains the voice `Steinn`. It is based on the neural network m
 
 *Chelsea hefur gengið allt á afturfótunum að undanförnu og í raun alveg síðan Roman Abramovich seldi félagið eftir innrás Rússa í Úkraínu.*
 
-![sampe1.wav](audio/stein_vits_onnx_xs_ipa_0.0.1_0.5_dcbf21919371eba1aa1b5e8c6e6f18fb.wav)
+[Chelsea.webm](https://github.com/grammatek/simaromur_voices/assets/734966/7ff78d95-aa90-44de-af97-13fa82112223)
 
 *Jürgen Klopp, knattspyrnustjóri Liverpool, beið í tvo mánuði með að tilkynna ákvörðun sína um að hann hygðist láta af störfum sem stjóri félagsins eftir tímabilið.*
 
-![sampe2.wav](audio/stein_vits_onnx_xs_ipa_0.0.1_0.5_55792870d3f9e16e685582f02aaf8c2.wav)
+[Jürgen.webm](https://github.com/grammatek/simaromur_voices/assets/734966/27b4784c-96c3-45f4-823d-140933fef6b3)
 
 *Greiningardeild Íslandsbanka segir að meðvindur á hlutabréfamörkuðum bæði hér á landi og erlendis hafi gert gæfumuninn á að raunávöxtun íslenskra lífeyrissjóða var jákvæð á lokaársfjórðungi síðasta árs.*
 
-![sample3.wav](audio/stein_vits_onnx_xs_ipa_0.0.1_0.5_8cd330a1fd6728df6a94279a0b621f0.wav)
+[Íslandsbanka.webm](https://github.com/grammatek/simaromur_voices/assets/734966/db341da6-286e-43db-bbc7-502fabd9f267)
 
 ### Training
 *Steinn* has been trained for ~750.000 steps on the Talromur1 [H dataset](https://repository.clarin.is/repository/xmlui/handle/20.500.12537/104).
