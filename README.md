@@ -1,18 +1,33 @@
-This repository contains ressources for the [Símarómur App](https://github.com/grammatek/simaromur) voice assets. These voices are neural network voices produced by the [Reykjavik University Language and Voice Lab](https://lvl.ru.is/) but converted to be usable with PyTorch mobile for inferencing.
+This repository contains resources for the [Símarómur App](https://github.com/grammatek/simaromur) voice assets. These voices are neural network voices produced by [Grammatek ehf](https://grammatek.is/).
 
 ## Voices
 
-Two voices are available: Álfur and Díljá. For these a [Fastspeech2](https://github.com/cadia-lvl/fastspeech2) acoustic model is combined with a [WaveGAN]() vocoder model. Each voice needs 2 models. The vocoder model isn't universal.
+This repository contains the voice `Steinn`. It is based on the neural network model [VITS](https://github.com/jaywalnut310/vits) and trained via
+[Piper TTS](https://github.com/rhasspy/piper), as well as converted to ONNX for inferencing.
 
-The voice models are converted to be compatible with PyTorch mobile via these scripts:
-- [Fastspeech2 model conversion](https://gitlab.com/tiro-is/tiro-tts/-/blob/7a08c2cb9c2c71678e7736ff4086b11093fdb09d/src/scripts/fastspeech_convert.py)
-- [MelGan model conversion](https://gitlab.com/tiro-is/tiro-tts/-/blob/7a08c2cb9c2c71678e7736ff4086b11093fdb09d/src/scripts/melgan_convert.py)
+### Audio Samples
 
-The Fastspeech2 model is quantized for size reduction. Both models only contain the parts necessary for inferencing. The inferencing interfaces of these models are augmented with new  PyTorch mobile compatible interfaces => `runMethod("mobile_inference", ...)` or `runMethod("inference", ...)` but also contain their respective usual inferencing interfaces.
+*Chelsea hefur gengið allt á afturfótunum að undanförnu og í raun alveg síðan Roman Abramovich seldi félagið eftir innrás Rússa í Úkraínu.*
 
-## Voice description file
+![sampe1.wav](audio/stein_vits_onnx_xs_ipa_0.0.1_0.5_dcbf21919371eba1aa1b5e8c6e6f18fb.wav)
 
-The file [voice-info.json](voice-info.json) is used to describe the voices and the corresponding voice files. Símarómur parses this file and uses it for applying the appropriate models for inferencing. The exact schema is not yet fixed. It will be developed further according to the needs of newer models we will support in the future.
+*Jürgen Klopp, knattspyrnustjóri Liverpool, beið í tvo mánuði með að tilkynna ákvörðun sína um að hann hygðist láta af störfum sem stjóri félagsins eftir tímabilið.*
+
+![sampe2.wav](audio/stein_vits_onnx_xs_ipa_0.0.1_0.5_55792870d3f9e16e685582f02aaf8c2.wav)
+
+*Greiningardeild Íslandsbanka segir að meðvindur á hlutabréfamörkuðum bæði hér á landi og erlendis hafi gert gæfumuninn á að raunávöxtun íslenskra lífeyrissjóða var jákvæð á lokaársfjórðungi síðasta árs.*
+
+![sample3.wav](audio/stein_vits_onnx_xs_ipa_0.0.1_0.5_8cd330a1fd6728df6a94279a0b621f0.wav)
+
+### Training
+*Steinn* has been trained for ~750.000 steps on the Talromur1 [H dataset](https://repository.clarin.is/repository/xmlui/handle/20.500.12537/104).
+All normalized text was transcribed to IPA phonemes in combination with primary and secondary syllable stresses. You need to use the voice
+together with the [Símarómur App](https://github.com/grammatek/simaromur), starting from version 2. Earlier versions of the app do not support ONNX models and IPA phoneme input.
+
+## Voice description files
+
+The [voice configuration](is-steinn-xs-ipa.onnx.json) file is used to describe the voice settings and IPA/ model symbol mappings.
+The file [voice-info.json](voice-info.json) is used as meta-data for the corresponding voice files.
 
 ## License
 
